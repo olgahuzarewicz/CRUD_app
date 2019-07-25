@@ -10,8 +10,6 @@ public interface EmployeeDao {
 
     Employee getEmployeeById(Long empId);
 
-    Employee insertEmployee(Employee emp);
-
     Employee updateEmployee(Employee emp);
 
     Employee deleteEmployee(Long empId);

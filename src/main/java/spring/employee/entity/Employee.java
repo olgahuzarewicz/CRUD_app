@@ -1,10 +1,10 @@
 package spring.employee.entity;
 
-import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,19 +15,19 @@ public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMP_ID")
-
-    @NotNull
     private Long empId;
 
+    @Column(name = "name")
     @NotEmpty(message="Name cannot be empty")
     private String name;
 
     private String departament;
 
-    @Range(min=0, max=15000, message = "Salary must be in range (1 - 15000)")
+    @Range(min = 1, max = 15000, message = "Salary must be in range (1 - 15000)")
     private Long salary;
 
     @Column(name = "JOINED_ON")
+    @NotNull
     private Date joinedOn;
 
     public Long getEmpId() {

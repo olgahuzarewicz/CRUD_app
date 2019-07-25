@@ -3,41 +3,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/employee.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/card.css}"/>
 </head>
 <body>
 <div class="card border-primary">
     <div class="card-body text-primary">
-        <form method="post" name="addEmployee" th:action="@{/add}">
+        <form method="post" th:action="@{/add}" th:object="${employee}">
             <h5 class="card-title">Add Employee</h5>
-            <errors path = "*" cssClass = "errorblock" element = "div" />
-            <hr>
             <div class="form-group">
                 <label>Name</label>
-                <input name="name" class="form-control">
-                <errors path="name"></errors>
+                <input class="form-control" th:field="*{name}">
+                <p class="alert alert-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
             </div>
             <div class="form-group">
                 <label>Departament</label>
-                <input name="departament" class="form-control" required>
+                <input class="form-control" th:field="*{departament}">
+                <p class="alert alert-danger" th:errors="*{departament}"
+                   th:if="${#fields.hasErrors('departament')}"></p>
             </div>
             <div class="form-group">
                 <label>Salary</label>
-                <input name="salary" class="form-control" required>
-                <errors path="salary"></errors>
+                <input class="form-control" th:field="*{salary}">
+                <p class="alert alert-danger" th:errors="*{salary}" th:if="${#fields.hasErrors('salary')}"></p>
             </div>
             <div class="modal-footer">
                 <a href="http://localhost:8080/SpringMVC2_war_exploded/"><input type="button"

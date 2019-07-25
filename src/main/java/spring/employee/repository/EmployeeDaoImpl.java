@@ -27,12 +27,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee insertEmployee(Employee emp) {
-        entityManager.persist(emp);
-        return emp;
-    }
-
-    @Override
     public Employee updateEmployee(Employee emp) {
         entityManager.merge(emp);
         return emp;

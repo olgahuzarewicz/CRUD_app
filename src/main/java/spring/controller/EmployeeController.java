@@ -4,8 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import spring.employee.entity.Employee;
 import spring.employee.service.EmployeeService;
 
@@ -15,6 +13,8 @@ import java.util.Date;
 @Controller
 @RequestMapping("/")
 public class EmployeeController {
+
+    private static final String HOME = "redirect:/";
 
     private EmployeeService employeeService;
 
@@ -34,13 +34,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public String showAdd() {
+    public String showAdd(Model model) {
+        model.addAttribute("employee", new Employee());
         return "add";
     }
 
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable(name = "id") Long id, Model model) {
-        model.addAttribute("currentEmployee", employeeService.getEmployeeById(id));
+        model.addAttribute("employee", employeeService.getEmployeeById(id));
         return "edit";
     }
 
@@ -51,28 +52,28 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public String insertEmployee(@ModelAttribute @Valid Employee newEmployee, BindingResult result) {
+    public String insertEmployee(@Valid @ModelAttribute Employee employee, BindingResult result) {
         if (result.hasErrors()) {
             return "add";
         }
-        newEmployee.setJoinedOn(new Date());
-        employeeService.insertEmployee(newEmployee);
-        return "redirect:/";
+        employee.setJoinedOn(new Date());
+        employeeService.insertEmployee(employee);
+        return HOME;
     }
 
     @PostMapping("/edit/{id}")
-    public String updateEmployee(@Valid @ModelAttribute("editEmployee") Employee employee, @PathVariable(name = "id") Long id, BindingResult result) {
+    public String updateEmployee(@Valid @ModelAttribute Employee employee, BindingResult result) {
         if (result.hasErrors()) {
-            return "redirect:/edit/{id}";
+            return "edit";
         }
         employee.setJoinedOn(new Date());
         employeeService.updateEmployee(employee);
-        return "redirect:/";
+        return HOME;
     }
 
     @PostMapping("/delete/{id}")
     public String deleteEmployee(@ModelAttribute("deleteEmployee") @PathVariable(name = "id") Long id) {
         employeeService.deleteEmployee(id);
-        return "redirect:/";
+        return HOME;
     }
 }

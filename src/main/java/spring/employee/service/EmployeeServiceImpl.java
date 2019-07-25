@@ -7,6 +7,7 @@ import spring.employee.entity.Employee;
 import spring.employee.repository.EmployeeDao;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,16 +28,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee insertEmployee(Employee emp) {
-        return this.employeesDao.insertEmployee(emp);
-    }
-
-    @Override
-    public Employee updateEmployee(Employee emp) {
         return this.employeesDao.updateEmployee(emp);
     }
 
     @Override
+    public Employee updateEmployee(Employee emp) {
+        Optional<Employee> optional = Optional.of(getEmployeeById(emp.getEmpId()));
+        return optional.isPresent() ? this.employeesDao.updateEmployee(emp) : null;
+    }
+
+    @Override
     public Employee deleteEmployee(Long empId) {
-        return this.employeesDao.deleteEmployee(empId);
+        Optional<Employee> optional = Optional.of(getEmployeeById(empId));
+        return optional.isPresent() ? this.employeesDao.deleteEmployee(empId) : null;
     }
 }
