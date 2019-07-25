@@ -1,0 +1,6 @@
+
+csquid:S46846"@Replace this persistent entity with a simple POJO or DTO object.(ˆŠÀ£ÿÿÿÿÿ8¦Ïý÷Á-
+ysquid:UselessImportCheck"NRemove this unused import 'org.springframework.web.servlet.view.RedirectView'.(ñÎ²Ò8ŠÕ’–Â-
+csquid:S4684@"@Replace this persistent entity with a simple POJO or DTO object.(ŸÉÍ¡ùÿÿÿÿ8¦Ïý÷Á-
+ysquid:UselessImportCheck"IRemove this unused import 'org.springframework.web.servlet.ModelAndView'.(Ç¨ÿäûÿÿÿÿ8«û„›Â-
+isquid:S1192<"KDefine a constant instead of duplicating this literal "redirect:/" 3 times.(äÔ¶½8ÝøížÂ-

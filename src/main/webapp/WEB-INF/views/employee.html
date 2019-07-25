@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All employees</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/employee.css}"/>
+    <link rel="script" th:href="@{/js/employee.js}"/>
+</head>
+<body>
+<br>
+<div class="row">
+<div class="col-sm-11">
+</div>
+
+<div class="col-sm-1">
+    <form th:action="@{/logout}" method="post">
+        <a th:href="@{/}"><input type="submit" class="btn btn-success" value="Log out"></a>
+    </form>
+</div>
+</div>
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Manage <b>Employees</b></h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="add" class="btn btn-success"><i class="material-icons">&#xE147;</i>
+                        <span>Add New Employee</span></a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Last update</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${allEmployees.empty}">
+                <td colspan="2"> No employees available</td>
+            </tr>
+            <tr th:each="employee : ${allEmployees}">
+                <td><span th:text="${employee.empId}"> Id </span></td>
+                <td><span th:text="${employee.name}"> Name </span></td>
+                <td><span th:text="${employee.departament}"> Departament </span></td>
+                <td><span th:text="${employee.salary}"> Salary </span></td>
+                <td><span th:text="${employee.joinedOn}"> Last update </span></td>
+                <td>
+                    <a th:href="@{edit/{id}(id=${employee.empId})}" class="edit"><i class="material-icons"
+                                                                                    data-toggle="tooltip"
+                                                                                    title="Edit">&#xE254;</i></a>
+                    <a th:href="@{delete/{id}(id=${employee.empId})}" class="delete"><i class="material-icons"
+                                                                                        data-toggle="tooltip"
+                                                                                        title="Delete">&#xE872;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
