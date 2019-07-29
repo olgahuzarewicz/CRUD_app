@@ -1,6 +1,7 @@
 package spring.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import spring.config.webflow.WebFlowConfig;
 
 public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -11,7 +12,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebConfig.class, JpaConfig.class};
+        return new Class[]{WebConfig.class, WebFlowConfig.class, JpaConfig.class};
     }
 
     @Override

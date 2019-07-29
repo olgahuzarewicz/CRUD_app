@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="user" class="spring.user.entity.User"/>
+    <var name="role" class="spring.user_roles.entity.UserRole"/>
+
+    <on-start>
+        <evaluate expression="registerHandler.init()" result="flowScope.registerModel"/>
+    </on-start>
+
+
+    <view-state id="registration" model="user">
+        <transition on="toRoles" to="roles"/>
+        <on-exit>
+            <evaluate expression="registerHandler.addUser(flowScope.registerModel, user)"/>
+        </on-exit>
+    </view-state>
+
+
+    <view-state id="roles" model="role">
+        <transition on="toConfirm" to="confirm"/>
+        <on-exit>
+            <evaluate expression="registerHandler.addRole(flowScope.registerModel, role)"/>
+        </on-exit>
+    </view-state>
+
+    <view-state id="confirm" model="flowScope.registerModel">
+        <transition on="goBackToUser" to="registration"/>
+        <transition on="goBackToRoles" to="roles"/>
+        <transition on="home" to="my-login-page"/>
+        <on-exit>
+            <evaluate expression="registerHandler.saveAll(flowScope.registerModel)"/>
+        </on-exit>
+    </view-state>
+
+    <view-state id="my-login-page"/>
+</flow>

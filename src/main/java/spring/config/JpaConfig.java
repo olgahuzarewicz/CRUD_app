@@ -14,7 +14,7 @@ import javax.persistence.ValidationMode;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"spring.employee.repository", "spring.employee.service."})
+@ComponentScan({"spring.employee", "spring.user"})
 public class JpaConfig {
 
     @Bean

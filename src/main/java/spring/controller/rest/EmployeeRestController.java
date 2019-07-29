@@ -1,4 +1,4 @@
-package spring.rest;
+package spring.controller.rest;
 
 import org.springframework.web.bind.annotation.*;
 import spring.employee.entity.Employee;

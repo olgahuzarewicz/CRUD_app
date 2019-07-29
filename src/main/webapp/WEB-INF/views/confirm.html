@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/employee.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/card.css}" type="text/css"/>
+</head>
+
+
+<body>
+<div class="card border-primary">
+    <div class="card-body text-primary">
+
+        <h5 class="card-title">Confirm data</h5>
+        <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" name="username" readonly="readonly" required
+                   th:field="*{registerModel.user.username}"
+                   th:value="${registerModel.user.username}">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" name="password" readonly="readonly" required
+                   th:field="*{registerModel.user.password}"
+                   th:value="${registerModel.user.password}">
+        </div>
+
+        <div class="form-group">
+            <label>Role</label>
+            <input class="form-control" name="role" readonly="readonly" required
+                   th:field="*{registerModel.userRole.role}"
+                   th:value="${registerModel.userRole.role}">
+        </div>
+        <br>
+
+        <div class="modal-footer">
+            <form method="post" th:action="${flowExecutionUrl}">
+                <input name="_eventId" type="hidden" value="goBackToUser">
+                <input class="btn btn-success" type="submit" value="Edit user"/>
+            </form>
+
+            <form method="post" th:action="${flowExecutionUrl}">
+                <input name="_eventId" type="hidden" value="goBackToRoles">
+                <input class="btn btn-success" type="submit" value="Edit role"/>
+            </form>
+
+
+            <form method="post" th:action="${flowExecutionUrl}">
+                <input name="_eventId" type="hidden" value="home">
+                <input class="btn btn-success" type="submit" value="Confirm"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

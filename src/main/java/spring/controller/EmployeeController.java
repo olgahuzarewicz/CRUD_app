@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import spring.employee.entity.Employee;
 import spring.employee.service.EmployeeService;
+import spring.user_roles.service.UserRolesService;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -18,8 +19,12 @@ public class EmployeeController {
 
     private EmployeeService employeeService;
 
-    EmployeeController(EmployeeService employeeService) {
+    private UserRolesService userRolesService;
+
+
+    EmployeeController(EmployeeService employeeService, UserRolesService userRolesService) {
         this.employeeService = employeeService;
+        this.userRolesService = userRolesService;
     }
 
     @GetMapping("/")
@@ -30,7 +35,7 @@ public class EmployeeController {
 
     @GetMapping("/access-denied")
     public String accessDenied() {
-        return "/error/access-denied";
+        return "/handler/access-denied";
     }
 
     @GetMapping("/add")
