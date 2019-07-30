@@ -30,6 +30,11 @@ public class RegisterHandler {
         registerModel.setUserRole(userRole);
     }
 
+    public String chooseFlow(RegisterModel registerModel, UserRole userRole) {
+
+        return userRole.getRole().equals("ROLE_USER") ? "ROLE_USER" : "ROLE_ADMIN";
+    }
+
     public String saveAll(RegisterModel registerModel) {
         String transitionValue = "success";
 

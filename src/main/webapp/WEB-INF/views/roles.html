@@ -12,11 +12,6 @@
 </head>
 <body>
 
-<!--<form method="post" th:action="${flowExecutionUrl}">-->
-<!--    <input type="hidden" name="_eventId" value="goBack">-->
-<!--    <input type="submit" class="btn btn-success" value="Back"/>-->
-<!--</form>-->
-
 <div class="card border-primary">
     <div class="card-body text-primary">
         <div class="form-group">
@@ -28,14 +23,13 @@
                 </select>
 
                 <div class="modal-footer">
-                    <input name="_eventId" type="hidden" value="toConfirm">
+                    <input name="_eventId" th:value="continue" type="hidden">
                     <input class="btn btn-success" type="submit" value="Submit"/>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

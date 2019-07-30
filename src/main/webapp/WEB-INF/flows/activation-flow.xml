@@ -21,10 +21,22 @@
 
 
     <view-state id="roles" model="role">
-        <transition on="toConfirm" to="confirm"/>
+        <transition on="continue" to="chooseFlow"></transition>
         <on-exit>
             <evaluate expression="registerHandler.addRole(flowScope.registerModel, role)"/>
         </on-exit>
+    </view-state>
+
+    <action-state id="chooseFlow">
+        <evaluate expression="registerHandler.chooseFlow(flowScope.registerModel, role)"/>
+        <transition on="ROLE_ADMIN" to="admin-page"/>
+        <transition on="ROLE_USER" to="confirm"/>
+    </action-state>
+
+    <view-state id="admin-page" model="flowScope.registerModel">
+        <transition on="goBackToUser" to="registration"/>
+        <transition on="goBackToRoles" to="roles"/>
+        <transition on="continue" to="confirm"/>
     </view-state>
 
     <view-state id="confirm" model="flowScope.registerModel">
